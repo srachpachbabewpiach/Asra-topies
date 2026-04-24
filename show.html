@@ -84,6 +84,39 @@
     <script src="assets/show.js"></script>
     <script src="assets/manifest.js"></script>
     <script src="assets/cache.js"></script>
-  </body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Odczytujemy zdjęcie
+    const savedPhoto = localStorage.getItem('saved_image'); // to z poprzedniego kroku
+    if (savedPhoto) {
+        // Tu podaj klasę lub ID obrazka na stronie show.html, gdzie ma być foto
+        const displayImg = document.querySelector('.photo_class_na_nowej_stronie'); 
+        if(displayImg) displayImg.src = savedPhoto;
+    }
+
+    // Odczytujemy tekst
+    const nameDisplay = document.querySelector('.name_class_na_nowej_stronie');
+    if(nameDisplay) nameDisplay.innerText = localStorage.getItem('user_name');
+});
+</script>
+
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Pobieramy dane z pamięci
+    const foto = localStorage.getItem('moje_zdjecie');
+    const imie = localStorage.getItem('moje_imie');
+    const nazwisko = localStorage.getItem('moje_nazwisko');
+
+    // Wyświetlamy zdjęcie (musisz sprawdzić jaką klasę ma Twoje zdjęcie na tej stronie)
+    // Jeśli na show.html Twoje zdjęcie ma klasę np. "user_photo", to użyj:
+    const imgTag = document.querySelector('.upload_uploaded'); // podmień klasę jeśli inna
+    if (imgTag && foto) imgTag.src = foto;
+
+    // Wyświetlamy tekst
+    const nameTag = document.querySelector('.name_display'); // podmień klasę jeśli inna
+    if (nameTag) nameTag.innerText = imie + " " + nazwisko;
+});
+</script>
+ </body>
 </html>
 
