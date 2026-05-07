@@ -43,29 +43,22 @@ upload.addEventListener("click", () => {
 imageInput.addEventListener("change", (event) => {
   upload.classList.remove("upload_loaded");
   upload.classList.add("upload_loading");
-
   upload.removeAttribute("selected");
 
   var file = imageInput.files[0];
-  var data = new FormData();
-  data.append("image", file);
+  var reader = new FileReader();
 
-  fetch("	https://api.imgur.com/3/image", {
-    method: "POST",
-    headers: {
-      Authorization: "Client-ID e4d98a899c8c946",
-    },
-    body: data,
-  })
-    .then((result) => result.json())
-    .then((response) => {
-      var url = response.data.link;
-      upload.classList.remove("error_shown");
-      upload.setAttribute("selected", url);
-      upload.classList.add("upload_loaded");
-      upload.classList.remove("upload_loading");
-      upload.querySelector(".upload_uploaded").src = url;
-    });
+  reader.onload = function(e) {
+    var base64 = e.target.result;
+
+    upload.classList.remove("error_shown");
+    upload.setAttribute("selected", base64);
+    upload.classList.add("upload_loaded");
+    upload.classList.remove("upload_loading");
+    upload.querySelector(".upload_uploaded").src = base64;
+  };
+
+  reader.readAsDataURL(file);
 });
 
 document.querySelector(".go").addEventListener("click", () => {
@@ -117,7 +110,7 @@ function isEmpty(value) {
 }
 
 function forwardToId(params) {
-  location.href = "/id?" + params;
+  location.href = "/id.html?" + params;
 }
 
 var guide = document.querySelector(".guide_holder");
