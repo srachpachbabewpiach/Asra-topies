@@ -62,7 +62,7 @@ imageInput.addEventListener("change", () => {
     })
     .catch((err) => {
       console.error(err);
-      alert("Nie udało się przesłać zdjęcia.\nSpróbuj inny plik (max 10MB).");
+      alert("Nie udało się przesłać zdjęcia.\nSpróbuj mniejsze zdjęcie (do 8-10MB) lub inne zdjęcie.");
     })
     .finally(() => {
       upload.classList.remove("upload_loading");
